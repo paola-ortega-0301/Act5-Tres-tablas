@@ -1,0 +1,20 @@
+{# app_eventos/templates/servicio/borrar_servicio.html #}
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card mt-4">
+    <div class="card-header bg-danger text-white">
+        <h2>Confirmar Eliminación de Servicio</h2>
+    </div>
+    <div class="card-body">
+        <p>¿Estás seguro de que quieres eliminar el servicio "<strong>{{ servicio.nombre }}</strong>"?</p>
+        <p>Esta acción no se puede deshacer.</p>
+
+        <form method="POST" action="{% url 'confirmar_borrar_servicio' servicio.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger me-2">Sí, Eliminar</button>
+            <a href="{% url 'ver_servicio' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

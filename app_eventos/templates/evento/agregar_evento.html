@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow p-4">
+    <h2 class="mb-4">Agregar Evento</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del Evento:</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción:</label>
+            <textarea name="descripcion" id="descripcion" class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="fecha_inicio" class="form-label">Fecha de Inicio:</label>
+            <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="fecha_fin" class="form-label">Fecha de Fin:</label>
+            <input type="date" name="fecha_fin" id="fecha_fin" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="ubicacion" class="form-label">Ubicación:</label>
+            <input type="text" name="ubicacion" id="ubicacion" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="capacidad" class="form-label">Capacidad:</label>
+            <input type="number" name="capacidad" id="capacidad" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="precio_base" class="form-label">Precio Base:</label>
+            <input type="number" name="precio_base" id="precio_base" step="0.01" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="servicios" class="form-label">Servicios (Mantén Ctrl/Cmd para seleccionar múltiples):</label>
+            <select name="servicios" id="servicios" class="form-select" multiple>
+                {% for servicio in servicios %}
+                    <option value="{{ servicio.id }}">{{ servicio.nombre }}</option>
+                {% endfor %}
+            </select>
+            {% if not servicios %}
+                <p class="text-warning mt-2">No hay servicios disponibles. Por favor, crea servicios primero.</p>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-success">Guardar Evento</button>
+    </form>
+</div>
+{% endblock %}

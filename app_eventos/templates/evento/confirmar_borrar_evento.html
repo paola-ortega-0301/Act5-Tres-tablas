@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow p-4 text-center">
+    <h2 class="mb-4 text-danger">Confirmar Borrado de Evento</h2>
+    <p class="lead">¿Estás seguro de que quieres eliminar el evento <strong>{{ evento.nombre }}</strong> (Ubicación: {{ evento.ubicacion }})?</p>
+    <p class="text-muted">Esta acción no se puede deshacer. También se eliminarán los empleados asociados a este evento.</p>
+    <form action="{% url 'borrar_evento' evento.id %}" method="post" class="d-inline-block mt-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-lg me-3">Sí, Borrar</button>
+        <a href="{% url 'ver_evento' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

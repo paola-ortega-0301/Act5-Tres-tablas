@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow p-4">
+    <h2 class="mb-4">Lista de Eventos</h2>
+    <a href="{% url 'agregar_evento' %}" class="btn btn-primary mb-3">Agregar Nuevo Evento</a>
+    {% if eventos %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Fechas</th>
+                        <th>Ubicación</th>
+                        <th>Capacidad</th>
+                        <th>Precio Base</th>
+                        <th>Servicios</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in eventos %}
+                    <tr>
+                        <td>{{ e.id }}</td>
+                        <td>{{ e.nombre }}</td>
+                        <td>{{ e.fecha_inicio|date:"d M Y" }} - {{ e.fecha_fin|date:"d M Y" }}</td>
+                        <td>{{ e.ubicacion }}</td>
+                        <td>{{ e.capacidad }}</td>
+                        <td>${{ e.precio_base|floatformat:2 }}</td>
+                        <td>
+                            {% for servicio in e.servicios.all %}
+                                <span class="badge bg-info text-dark">{{ servicio.nombre }}</span>
+                            {% empty %}
+                                <span class="badge bg-secondary">Ninguno</span>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a href="{% url 'actualizar_evento' e.id %}" class="btn btn-warning btn-sm me-2">Editar</a>
+                            <form action="{% url 'confirmar_borrar_evento' e.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info">No hay eventos registrados todavía.</div>
+    {% endif %}
+</div>
+{% endblock %}

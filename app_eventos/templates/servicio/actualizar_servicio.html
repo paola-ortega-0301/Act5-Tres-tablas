@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Actualizar Servicio</h2>
+<form method="POST" action="/realizar_actualizacion_servicio/{{ servicio.id }}/">
+  {% csrf_token %}
+  <input type="text" name="nombre" value="{{ servicio.nombre }}" class="form-control mb-2">
+  <textarea name="descripcion" class="form-control mb-2">{{ servicio.descripcion }}</textarea>
+  <input type="number" name="costo" value="{{ servicio.costo }}" class="form-control mb-2">
+  <input type="number" name="duracion_horas" value="{{ servicio.duracion_horas }}" class="form-control mb-2">
+  <input type="text" name="tipo" value="{{ servicio.tipo }}" class="form-control mb-2">
+  <div class="form-check mb-2">
+    <input class="form-check-input" type="checkbox" name="disponible" {% if servicio.disponible %}checked{% endif %}>
+    <label class="form-check-label">Disponible</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Actualizar</button>
+</form>
+{% endblock %}

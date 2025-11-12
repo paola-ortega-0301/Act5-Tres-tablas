@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow p-4">
+    <h2 class="mb-4">Actualizar Empleado</h2>
+    <form method="POST" action="{% url 'realizar_actualizacion_empleado' empleado.id %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" value="{{ empleado.nombre }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido:</label>
+            <input type="text" name="apellido" id="apellido" value="{{ empleado.apellido }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="puesto" class="form-label">Puesto:</label>
+            <input type="text" name="puesto" id="puesto" value="{{ empleado.puesto }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="salario" class="form-label">Salario:</label>
+            <input type="number" name="salario" id="salario" step="0.01" value="{{ empleado.salario }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono:</label>
+            <input type="text" name="telefono" id="telefono" value="{{ empleado.telefono }}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" name="email" id="email" value="{{ empleado.email }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="fecha_contratacion" class="form-label">Fecha de Contratación:</label>
+            <input type="date" name="fecha_contratacion" id="fecha_contratacion" value="{{ empleado.fecha_contratacion|date:'Y-m-d' }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="evento" class="form-label">Evento:</label>
+            <select name="evento" id="evento" class="form-select" required>
+                {% for evento in eventos %}
+                    <option value="{{ evento.id }}" {% if evento.id == empleado.evento.id %}selected{% endif %}>{{ evento.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Empleado</button>
+        <a href="{% url 'ver_empleado' %}" class="btn btn-secondary ms-2">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow p-4 text-center">
+    <h2 class="mb-4 text-danger">Confirmar Borrado de Empleado</h2>
+    <p class="lead">¿Estás seguro de que quieres eliminar al empleado <strong>{{ empleado.nombre }} {{ empleado.apellido }}</strong> (Puesto: {{ empleado.puesto }})?</p>
+    <p class="text-muted">Esta acción no se puede deshacer.</p>
+    <form action="{% url 'borrar_empleado' empleado.id %}" method="post" class="d-inline-block mt-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-lg me-3">Sí, Borrar</button>
+        <a href="{% url 'ver_empleado' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow p-4">
+    <h2 class="mb-4">Lista de Empleados</h2>
+    <a href="{% url 'agregar_empleado' %}" class="btn btn-primary mb-3">Agregar Nuevo Empleado</a>
+    {% if empleados %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Completo</th>
+                        <th>Puesto</th>
+                        <th>Salario</th>
+                        <th>Email</th>
+                        <th>Evento Asignado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in empleados %}
+                    <tr>
+                        <td>{{ e.id }}</td>
+                        <td>{{ e.nombre }} {{ e.apellido }}</td>
+                        <td>{{ e.puesto }}</td>
+                        <td>${{ e.salario|floatformat:2 }}</td>
+                        <td>{{ e.email }}</td>
+                        <td>{{ e.evento.nombre }}</td>
+                        <td>
+                            <a href="{% url 'actualizar_empleado' e.id %}" class="btn btn-warning btn-sm me-2">Editar</a>
+                            <form action="{% url 'confirmar_borrar_empleado' e.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info">No hay empleados registrados todavía.</div>
+    {% endif %}
+</div>
+{% endblock %}

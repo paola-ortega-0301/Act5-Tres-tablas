@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">🎊 Sistema de Administración Eventos</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">🏠 Inicio</a></li>
+  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">💼 Servicio</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/agregar_servicio/">Agregar Servicio</a></li>
+              <li><a class="dropdown-item" href="/ver_servicio/">Ver Servicio</a></li>
+            </ul>
+          </li>
+  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">🎟️ Evento</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'agregar_evento' %}">Agregar Evento</a></li>
+              <li><a class="dropdown-item" href="{% url 'ver_evento' %}">Ver Eventos</a></li>
+            </ul>
+          </li>
+  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">👩‍💼 Empleado</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'agregar_empleado' %}">Agregar Empleado</a></li>
+              <li><a class="dropdown-item" href="{% url 'ver_empleado' %}">Ver Empleados</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
